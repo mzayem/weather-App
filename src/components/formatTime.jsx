@@ -24,10 +24,7 @@ export default function FormatTime(dateTimeString) {
 
   return (
     <>
-      <span>
-        {dayString}
-        <br />
-      </span>
+      <h4 style={{ margin: 0 }}>{dayString}</h4>
       {hours}:{minutes < 10 ? "0" : ""}
       {minutes} {amOrPm}
     </>

@@ -4,7 +4,7 @@ import FormatTime from "./formatTime";
 
 function Forecast({ list }) {
   if (!list || !Array.isArray(list) || list.length === 0) {
-    return <div>No forecast available</div>;
+    return <div style={{ margin: 50 }}>No forecast available</div>;
   }
 
   return (

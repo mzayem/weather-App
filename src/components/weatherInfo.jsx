@@ -3,7 +3,7 @@ import "./style.css";
 
 function WeatherInfo({ info }) {
   if (!info || !info.main || !info.weather || info.weather.length === 0) {
-    return <div>No weather information available</div>;
+    return <div style={{ margin: 30 }}>No weather information available</div>;
   }
 
   const { name, main, visibility, weather } = info;
