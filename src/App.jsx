@@ -3,8 +3,6 @@ import "./App.css";
 import Forecast from "./components/forecast";
 import WeatherInfo from "./components/weatherInfo";
 
-import BackgroundImage from "./main";
-
 export default function App() {
   const [lat, setLat] = useState([]);
   const [long, setLong] = useState([]);
