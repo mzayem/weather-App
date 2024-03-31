@@ -6,7 +6,7 @@ function WeatherInfo({ info }) {
     return <div style={{ margin: 30 }}>No weather information available</div>;
   }
 
-  const { name, main, visibility, weather } = info;
+  const { name, main, wind, weather } = info;
 
   return (
     <>
@@ -17,7 +17,7 @@ function WeatherInfo({ info }) {
             <h2>{name}</h2>
             <p>Feels like: {Math.round(main.feels_like)}°C</p>
             <p>Humidity: {main.humidity}%</p>
-            <p>Visibility: {visibility}km</p>
+            <p>Wind: {wind.speed}m/s</p>
           </div>
         </div>
         <div className="status">
