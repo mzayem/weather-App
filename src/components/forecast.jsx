@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import FormatTime from "./formatTime";
 
 function Forecast({ list }) {
   if (!list || !Array.isArray(list) || list.length === 0) {
@@ -8,11 +9,17 @@ function Forecast({ list }) {
 
   return (
     <div className="forecast">
-      <div>
-        <p>hello</p>
-        {list.map((item, index) => (
-          <div key={index}>
-            <p>{item.main.temp}</p>
+      <h2>Hourly updates</h2>
+      <div className="row">
+        {list.slice(0, 10).map((item, index) => (
+          <div key={index} className="column">
+            <p>{FormatTime(item.dt_txt)}</p>
+            <h3>{Math.round(item.main.temp)}°C</h3>
+            <img
+              src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
+              alt="Weather Icon"
+            />
+            <p>{item.weather[0].description}</p>
           </div>
         ))}
       </div>

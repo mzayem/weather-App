@@ -18,6 +18,11 @@ img {
   width: 100px;
 }
 
+.other {
+  margin: 0px;
+  text-align: left;
+}
+
 @media (max-width: 768px) {
   .info {
     flex-direction: column;
@@ -25,3 +30,34 @@ img {
 }
 
 /* forecast */
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  width: 100%;
+}
+.column {
+  margin: 5px;
+  flex: 18%;
+  max-width: 25%;
+  padding: 0 4px;
+  background-color: rgba(255, 255, 255, 0.151);
+  border: solid 1px white;
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+}
+
+@media (max-width: 800px) {
+  .column {
+    flex: 25%;
+    max-width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .column {
+    flex: 30%;
+    max-width: 100%;
+  }
+}

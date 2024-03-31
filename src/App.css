@@ -9,11 +9,25 @@
 
 .glass {
   margin: 50px;
-  width: 100%;
+  padding: 50px;
+  width: 90%;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.151);
-  height: 500px;
+
   border: solid 1px white;
   border-radius: 20px;
   backdrop-filter: blur(20px);
+}
+
+.custom-input {
+  width: 200px; /* Adjust width as needed */
+  height: 20px; /* Adjust height as needed */
+  background-color: transparent;
+  color: black; /* Text color */
+  border: 1px solid black; /* Border color */
+  border-radius: 5px; /* Rounded corners */
+  padding-left: 10px; /* Left padding */
+}
+.custom-input::placeholder {
+  color: rgb(0, 0, 0); /* Placeholder color */
 }
