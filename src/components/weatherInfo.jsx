@@ -14,8 +14,8 @@ function WeatherInfo({ info }) {
       <h2>Current Weather</h2>
       <div className="info">
         <div>
-          <h2>{name}</h2>
-          <div className="other">
+          <div className="data">
+            <h2>{name}</h2>
             <p>feels like: {Math.round(main.feels_like)}</p>
             <p>humidity: {main.humidity}%</p>
             <p>Visibility: {visibility}km</p>
