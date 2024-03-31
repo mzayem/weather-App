@@ -1,3 +1,4 @@
+import "./style.css";
 export default function FormatTime(dateTimeString) {
   const date = new Date(dateTimeString);
   const hours = date.getHours() % 12 || 12; // Convert hours to 12-hour format
@@ -24,9 +25,15 @@ export default function FormatTime(dateTimeString) {
 
   return (
     <>
-      <h4 style={{ margin: 0 }}>{dayString}</h4>
-      {hours}:{minutes < 10 ? "0" : ""}
-      {minutes} {amOrPm}
+      <span className="dayTitle">
+        {dayString}
+        <br />
+      </span>
+
+      <span>
+        {hours}:{minutes < 10 ? "0" : ""}
+        {minutes} {amOrPm}
+      </span>
     </>
   );
 }

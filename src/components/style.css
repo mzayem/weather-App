@@ -65,6 +65,11 @@ img {
   backdrop-filter: blur(20px);
   animation: pop 0.5s ease forwards;
 }
+.dayTitle {
+  margin: 0;
+  font-size: 1em;
+  font-weight: bold;
+}
 
 @media (max-width: 800px) {
   .column {

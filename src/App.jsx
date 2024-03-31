@@ -5,17 +5,17 @@ import WeatherInfo from "./components/weatherInfo";
 
 function BackgroundImage(weather) {
   if (weather.includes("clouds")) {
-    return "url(https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg)";
+    return "url(https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("thunderstorm")) {
-    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg)";
+    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("drizzle")) {
-    return "url(https://images.pexels.com/photos/7002970/pexels-photo-7002970.jpeg)";
+    return "url(https://images.pexels.com/photos/7002970/pexels-photo-7002970.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("snow")) {
-    return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg)";
+    return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("fog")) {
-    return "url(https://images.pexels.com/photos/5708054/pexels-photo-5708054.jpeg)";
+    return "url(https://images.pexels.com/photos/5708054/pexels-photo-5708054.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("smoke")) {
-    return "url(https://images.pexels.com/photos/4619957/pexels-photo-4619957.jpeg)";
+    return "url(https://images.pexels.com/photos/4619957/pexels-photo-4619957.jpeg?auto=compress&cs=tinysrgb)";
   } else {
     return "url(https://wallpapercave.com/wp/wp6680277.jpg)";
   }
@@ -25,6 +25,7 @@ export default function App() {
   const [forecast, setForecast] = useState([]);
   const [city, setCity] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = setTimeout(async () => {
@@ -60,9 +61,11 @@ export default function App() {
             "--background-image",
             backgroundImage
           );
+          setLoading(false);
         });
       } catch (error) {
         console.error(error);
+        setLoading(false);
       }
     }, 1000);
 
@@ -79,20 +82,24 @@ export default function App() {
 
   return (
     <>
-      <div className="glass">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter city name"
-            value={city}
-            onChange={handleInputChange}
-            className="custom-input"
-          />
-        </form>
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="glass">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Enter city name"
+              value={city}
+              onChange={handleInputChange}
+              className="custom-input"
+            />
+          </form>
 
-        <WeatherInfo info={weatherData} />
-        <Forecast list={forecast.list} />
-      </div>
+          <WeatherInfo info={weatherData} />
+          <Forecast list={forecast.list} />
+        </div>
+      )}
     </>
   );
 }
