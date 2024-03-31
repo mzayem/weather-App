@@ -58,7 +58,7 @@ body {
   }
 }
 
-/* CSS for loading spinner */
+/* loader */
 .loading {
   position: fixed;
   top: 50%;

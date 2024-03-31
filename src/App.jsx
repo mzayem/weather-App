@@ -49,7 +49,7 @@ export default function App() {
           console.log(res);
 
           console.log(
-            "weatherData.weather[0].main",
+            "weatherData.weather[0].description",
             data.weather[0].description
           );
 
