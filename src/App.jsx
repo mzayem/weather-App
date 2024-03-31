@@ -3,22 +3,35 @@ import "./App.css";
 import Forecast from "./components/forecast";
 import WeatherInfo from "./components/weatherInfo";
 
+function BackgroundImage(weather) {
+  if (weather.includes("clouds")) {
+    return "url(https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg)";
+  } else if (weather.includes("thunderstorm")) {
+    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg)";
+  } else if (weather.includes("drizzle")) {
+    return "url(https://images.pexels.com/photos/7002970/pexels-photo-7002970.jpeg)";
+  } else if (weather.includes("snow")) {
+    return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg)";
+  } else if (weather.includes("fog")) {
+    return "url(https://images.pexels.com/photos/5708054/pexels-photo-5708054.jpeg)";
+  } else if (weather.includes("smoke")) {
+    return "url(https://images.pexels.com/photos/4619957/pexels-photo-4619957.jpeg)";
+  } else {
+    return "url(https://wallpapercave.com/wp/wp6680277.jpg)";
+  }
+}
+
 export default function App() {
-  const [lat, setLat] = useState([]);
-  const [long, setLong] = useState([]);
   const [forecast, setForecast] = useState([]);
   const [city, setCity] = useState([]);
   const [weatherData, setWeatherData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = setTimeout(async () => {
       try {
         navigator.geolocation.getCurrentPosition(async function (position) {
           const lat = position.coords.latitude;
           const long = position.coords.longitude;
-
-          console.log("Latitude is:", lat);
-          console.log("Longitude is:", long);
 
           const response = await fetch(
             `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&q=${city}&units=metric&appid=39dd8e5ec14e5ea319ff1038f9535b49`
@@ -33,14 +46,27 @@ export default function App() {
           const res = await forecastData.json();
           setForecast(res);
           console.log(res);
+
+          console.log(
+            "weatherData.weather[0].main",
+            data.weather[0].description
+          );
+
+          const backgroundImage = BackgroundImage(
+            data.weather[0].description ?? "clouds"
+          );
+
+          document.documentElement.style.setProperty(
+            "--background-image",
+            backgroundImage
+          );
         });
       } catch (error) {
         console.error(error);
-        // Handle error (e.g., display error message to the user)
       }
-    };
+    }, 1000);
 
-    fetchData();
+    return () => clearTimeout(fetchData);
   }, [city]);
 
   const handleInputChange = (e) => {
@@ -49,7 +75,6 @@ export default function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();
   };
 
   return (

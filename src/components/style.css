@@ -23,9 +23,16 @@ img {
   text-align: left;
 }
 
+.status > * {
+  margin: 0px;
+}
+
 @media (max-width: 768px) {
   .info {
-    flex-direction: column;
+    flex-direction: row-reverse;
+  }
+  .data > p {
+    margin: 0px;
   }
 }
 
@@ -59,5 +66,11 @@ img {
   .column {
     flex: 30%;
     max-width: 100%;
+    padding: 10px;
+  }
+  .column > * {
+    flex: 30%;
+    max-width: 100%;
+    margin: 0px;
   }
 }

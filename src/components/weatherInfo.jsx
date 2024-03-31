@@ -10,24 +10,23 @@ function WeatherInfo({ info }) {
 
   return (
     <>
-      {" "}
       <h2>Current Weather</h2>
       <div className="info">
         <div>
           <div className="data">
             <h2>{name}</h2>
-            <p>feels like: {Math.round(main.feels_like)}</p>
-            <p>humidity: {main.humidity}%</p>
+            <p>Feels like: {Math.round(main.feels_like)}°C</p>
+            <p>Humidity: {main.humidity}%</p>
             <p>Visibility: {visibility}km</p>
           </div>
         </div>
-        <div>
+        <div className="status">
           <img
             src={`https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`}
             alt="Weather Icon"
           />
-          <h2>{Math.round(main.temp)}°C</h2>
-          <p>{weather[0].description}</p>
+          <h2 style={{ fontSize: 48 }}>{Math.round(main.temp)}°C</h2>
+          <p>{weather[0].description.toUpperCase()}</p>
         </div>
       </div>
     </>
