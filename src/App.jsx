@@ -1,40 +1,47 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import WeatherInfo from "./components/weatherInfo";
 import Forecast from "./components/forecast";
+import WeatherInfo from "./components/weatherInfo";
 
-function App() {
-  const [weatherData, setWeatherData] = useState([]);
-  const [city, setCity] = useState([]);
+export default function App() {
   const [lat, setLat] = useState([]);
   const [long, setLong] = useState([]);
+  const [forecast, setForecast] = useState([]);
+  const [city, setCity] = useState([]);
+  const [weatherData, setWeatherData] = useState([]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    });
+    const fetchData = async () => {
+      try {
+        navigator.geolocation.getCurrentPosition(async function (position) {
+          const lat = position.coords.latitude;
+          const long = position.coords.longitude;
 
-    console.log("Latitude is:", lat);
-    console.log("Longitude is:", long);
-  }, [lat, long]);
+          console.log("Latitude is:", lat);
+          console.log("Longitude is:", long);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&q=${city}&units=metric&appid=39dd8e5ec14e5ea319ff1038f9535b49`
-      );
-      const data = await response.json();
-      setWeatherData(data);
-      console.log(data);
-      <q></q>;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => {
+          const response = await fetch(
+            `https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&q=${city}&units=metric&appid=39dd8e5ec14e5ea319ff1038f9535b49`
+          );
+          const data = await response.json();
+          setWeatherData(data);
+          console.log(data);
+
+          const forecastData = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&q=${city}&units=metric&appid=39dd8e5ec14e5ea319ff1038f9535b49`
+          );
+          const res = await forecastData.json();
+          setForecast(res);
+          console.log(res);
+        });
+      } catch (error) {
+        console.error(error);
+        // Handle error (e.g., display error message to the user)
+      }
+    };
+
     fetchData();
-  }, []);
+  }, [city]);
 
   const handleInputChange = (e) => {
     setCity(e.target.value);
@@ -48,8 +55,6 @@ function App() {
   return (
     <>
       <div className="glass">
-        <p>hello</p>
-
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -60,10 +65,8 @@ function App() {
         </form>
 
         <WeatherInfo info={weatherData} />
-        <Forecast />
+        <Forecast list={forecast.list} />
       </div>
     </>
   );
 }
-
-export default App;
