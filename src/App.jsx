@@ -9,13 +9,13 @@ function BackgroundImage(weather) {
   } else if (weather.includes("thunderstorm")) {
     return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("drizzle")) {
-    return "url(https://images.pexels.com/photos/7002970/pexels-photo-7002970.jpeg?auto=compress&cs=tinysrgb)";
+    return "url(https://images.pexels.com/photos/125510/pexels-photo-125510.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("snow")) {
     return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("fog")) {
-    return "url(https://images.pexels.com/photos/5708054/pexels-photo-5708054.jpeg?auto=compress&cs=tinysrgb)";
+    return "url(https://images.pexels.com/photos/5865568/pexels-photo-5865568.jpeg?auto=compress&cs=tinysrgb)";
   } else if (weather.includes("smoke")) {
-    return "url(https://images.pexels.com/photos/4619957/pexels-photo-4619957.jpeg?auto=compress&cs=tinysrgb)";
+    return "url(https://images.pexels.com/photos/4527360/pexels-photo-4527360.jpeg?auto=compress&cs=tinysrgb)";
   } else {
     return "url(https://wallpapercave.com/wp/wp6680277.jpg)";
   }

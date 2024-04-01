@@ -19,7 +19,7 @@ function Forecast({ list }) {
               src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
               alt="Weather Icon"
             />
-            <p>{item.weather[0].description}</p>
+            <p>{item.weather[0].description.toUpperCase()}</p>
           </div>
         ))}
       </div>
