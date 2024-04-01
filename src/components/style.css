@@ -75,20 +75,22 @@ img {
   font-weight: bold;
 }
 
-@media (max-width: 768px) {
-  .info > div {
-    width: 100%;
-    max-width: 100%;
-  }
+@media (max-width: 800px) {
   .column {
-    flex: 0 0 calc(33.33% - 10px);
-    max-width: calc(33.33% - 10px);
+    flex: 25%;
+    max-width: 50%;
   }
 }
 
 @media (max-width: 600px) {
   .column {
-    flex: 0 0 calc(50% - 10px);
-    max-width: calc(50% - 10px);
+    flex: 30%;
+    max-width: 100%;
+    padding: 10px;
+  }
+  .column > * {
+    flex: 30%;
+    max-width: 100%;
+    margin: 0px;
   }
 }
