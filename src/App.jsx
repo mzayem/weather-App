@@ -6,19 +6,33 @@ import WeatherInfo from "./components/weatherInfo";
 function BackgroundImage(weather) {
   if (weather.includes("clouds")) {
     return "url(https://images.pexels.com/photos/531756/pexels-photo-531756.jpeg?auto=compress&cs=tinysrgb)";
-  } else if (weather.includes("thunderstorm")) {
-    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg?auto=compress&cs=tinysrgb)";
-  } else if (weather.includes("drizzle")) {
-    return "url(https://images.pexels.com/photos/125510/pexels-photo-125510.jpeg?auto=compress&cs=tinysrgb)";
-  } else if (weather.includes("snow")) {
-    return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg?auto=compress&cs=tinysrgb)";
-  } else if (weather.includes("fog")) {
-    return "url(https://images.pexels.com/photos/5865568/pexels-photo-5865568.jpeg?auto=compress&cs=tinysrgb)";
-  } else if (weather.includes("smoke")) {
-    return "url(https://images.pexels.com/photos/4527360/pexels-photo-4527360.jpeg?auto=compress&cs=tinysrgb)";
-  } else {
-    return "url(https://wallpapercave.com/wp/wp6680277.jpg)";
   }
+  if (weather.includes("thunderstorm")) {
+    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("drizzle")) {
+    return "url(https://images.pexels.com/photos/125510/pexels-photo-125510.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("snow")) {
+    return "url(https://images.pexels.com/photos/17834920/pexels-photo-17834920/free-photo-of-trees-in-snow-in-winter-landscape-on-sunset.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("fog")) {
+    return "url(https://images.pexels.com/photos/5865568/pexels-photo-5865568.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("smoke")) {
+    return "url(https://images.pexels.com/photos/4527360/pexels-photo-4527360.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("haze")) {
+    return "url(https://d2h8hramu3xqoh.cloudfront.net/blog/wp-content/uploads/2022/08/Hazy-Skies-scaled.webp)";
+  }
+  if (weather.includes("rain")) {
+    return "url(https://images.pexels.com/photos/2226190/pexels-photo-2226190.jpeg?auto=compress&cs=tinysrgb)";
+  }
+  if (weather.includes("mist")) {
+    return "url(https://cdn.naturettl.com/wp-content/uploads/2014/07/22014424/featured4.jpg)";
+  }
+
+  return "url(https://wallpapercave.com/wp/wp6680277.jpg)";
 }
 
 export default function App() {
@@ -57,10 +71,28 @@ export default function App() {
             data.weather[0].description ?? "clouds"
           );
 
-          document.documentElement.style.setProperty(
-            "--background-image",
-            backgroundImage
-          );
+          const imageUrl = backgroundImage.slice(4, -1).replace(/"/g, "");
+
+          // STEP 1: fade out current background
+          document.documentElement.classList.remove("bg-loaded");
+
+          // STEP 2: preload new image
+          const img = new Image();
+          img.src = imageUrl;
+
+          img.onload = () => {
+            // STEP 3: swap background
+            document.documentElement.style.setProperty(
+              "--background-image",
+              backgroundImage
+            );
+
+            // STEP 4: fade in
+            requestAnimationFrame(() => {
+              document.documentElement.classList.add("bg-loaded");
+            });
+          };
+
           setLoading(false);
         });
       } catch (error) {
