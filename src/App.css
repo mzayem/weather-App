@@ -17,8 +17,9 @@ body {
   border: solid 1px white;
   border-radius: 20px;
   max-width: 90%;
+  width: 82vw !important;
   min-width: 280px;
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(10px);
   animation: pop 0.5s ease forwards;
 }
 
